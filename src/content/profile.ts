@@ -7,7 +7,7 @@ export const profile = {
   legalName: "Syed Muhammad Shanib Burney",
   title: "Senior Software Engineer",
   pitch:
-    "I build scalable web products end to end: APIs, microservices, front ends, and the cloud infrastructure they run on.",
+    "I build scalable web products end to end: APIs, microservices, frontends, and the cloud infrastructure they run on.",
   availability: "Open to full-time (onsite or remote), project & contract work",
   email: "shanib.burney@gmail.com",
   phone: { display: "+92 341 2977002", href: "tel:+923412977002" },

@@ -11,7 +11,7 @@ const LINES: Token[][] = [
   [["p", "  "], ["v", "role"], ["p", ": "], ["s", '"Senior Software Engineer"'], ["p", ","]],
   [["p", "  "], ["v", "builds"], ["p", ": ["]],
   [["p", "    "], ["s", '"APIs"'], ["p", ", "], ["s", '"microservices"'], ["p", ","]],
-  [["p", "    "], ["s", '"front ends"'], ["p", ", "], ["s", '"cloud infra"'], ["p", ","]],
+  [["p", "    "], ["s", '"frontends"'], ["p", ", "], ["s", '"cloud infra"'], ["p", ","]],
   [["p", "  ],"]],
   [["p", "  "], ["v", "status"], ["p", ": "], ["s", '"open_to_work"'], ["p", ","]],
   [["p", "};"]],
@@ -24,7 +24,7 @@ const TERMINAL: { tone: "dim" | "accent" | "ok"; text: string }[] = [
   { tone: "accent", text: "▸ booting services…" },
   { tone: "ok", text: "✓ services online" },
   { tone: "ok", text: "✓ 10+ projects deployed" },
-  { tone: "ok", text: "✓ team: 7 members led" },
+  { tone: "ok", text: "✓ 5+ years of experience" },
   { tone: "accent", text: "● status: open to work" },
 ];
 

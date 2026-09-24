@@ -27,7 +27,7 @@
 ## 4. Hero
 - Prompt line `~/shanib-burney $` + pill: **Open to full-time (onsite or remote), project & contract work**
 - Name: **Shanib Burney** (word-by-word reveal). Title: **Senior Software Engineer**
-- Pitch: *"I build scalable web products end to end: APIs, microservices, front ends, and the cloud infrastructure they run on."* No technology names in the hero, so it stays valid as the stack grows (FastAPI, Spring Boot, agentic AI later).
+- Pitch: *"I build scalable web products end to end: APIs, microservices, frontends, and the cloud infrastructure they run on."* No technology names in the hero, so it stays valid as the stack grows (FastAPI, Spring Boot, agentic AI later).
 - Buttons: **View projects** (primary) · **Download CV**
 - Links: LinkedIn `https://www.linkedin.com/in/shanib-burney-4a63b51bb/` · Email `shanib.burney@gmail.com` · Phone `+92 341 2977002` (`tel:+923412977002`) · Karachi, Pakistan
 - Stats (count up): **5+** Years experience · **7** Team members led · **10+** Projects delivered

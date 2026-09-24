@@ -72,6 +72,21 @@ export function Hero() {
   const [alive, setAlive] = useState(false);
   const onRun = useCallback((v: boolean) => setAlive(v), []);
 
+  // Below `lg` the hero stacks copy above the editor, so the section is
+  // taller than the viewport and the editor sits further down the page.
+  // The scroll-linked exit below is tuned for the side-by-side desktop
+  // layout; on mobile it would already be well underway (editor faded/
+  // tilted) by the time the editor first scrolls into view, so skip it there.
+  const [skipScrollExit, setSkipScrollExit] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1023px)");
+    const onMq = () => setSkipScrollExit(mq.matches);
+    onMq();
+    mq.addEventListener("change", onMq);
+    return () => mq.removeEventListener("change", onMq);
+  }, []);
+  const skipExit = reduce || skipScrollExit;
+
   // Scroll-linked exit: the editor tilts back and fades, the copy drifts up.
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const p = useTransform(scrollYProgress, [0, 0.8], [0, 1], { clamp: true });
@@ -113,7 +128,7 @@ export function Hero() {
       <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-44 bg-gradient-to-b from-transparent to-bg" />
 
       <div className="container-x grid grid-cols-1 items-center gap-12 pt-28 pb-24 lg:grid-cols-[1.05fr_1fr] lg:gap-16 2xl:gap-24">
-        <motion.div style={reduce ? undefined : { y: copyY, opacity: copyOpacity }}>
+        <motion.div style={skipExit ? undefined : { y: copyY, opacity: copyOpacity }}>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -229,7 +244,7 @@ export function Hero() {
             transition={{ duration: 1.1, delay: 0.5, ease }}
           >
             <motion.div
-              style={reduce ? undefined : { rotateX: edRotate, y: edY, scale: edScale, opacity: edOpacity, transformOrigin: "50% 100%" }}
+              style={skipExit ? undefined : { rotateX: edRotate, y: edY, scale: edScale, opacity: edOpacity, transformOrigin: "50% 100%" }}
             >
               <CodeEditor onRun={onRun} reduce={reduce} />
             </motion.div>
