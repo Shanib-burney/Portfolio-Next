@@ -1,0 +1,6 @@
+# Packages allowed to run install scripts (native binaries for image optimization and linting).
+allowBuilds:
+  sharp: true
+  unrs-resolver: true
+minimumReleaseAgeExclude:
+  - framer-motion@13.4.3

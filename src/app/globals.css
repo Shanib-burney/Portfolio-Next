@@ -1,0 +1,290 @@
+@import "tailwindcss";
+
+/* Light mode is driven by data-theme on <html> (set before paint by the theme script). */
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
+
+/* ------------------------------------------------------------------
+   Design tokens. Components use the Tailwind names below, never raw hex.
+   ------------------------------------------------------------------ */
+:root {
+  --bg: #07080c;
+  --surface: #0d0f16;
+  --line: #1d2130;
+  --fg: #e8eaf0;
+  --muted: #8a90a2;
+  --faint: #5a5f72;
+  --accent: #6366f1;
+  --accent-rgb: 99, 102, 241;
+  --ok: #34d399;
+  --ok-rgb: 52, 211, 153;
+  --str: #f5c07a;
+  --kw: #c792ea;
+  --prop: #82aaff;
+  --fn: #7fdbca;
+  --punc: #9aa3b8;
+
+  --nav-bg: rgba(7, 8, 12, 0.72);
+  --grid-dot: rgba(255, 255, 255, 0.07);
+  --card-a: rgba(18, 21, 33, 0.9);
+  --card-b: rgba(11, 13, 20, 0.92);
+  --shadow: rgba(0, 0, 0, 0.75);
+  --ghost: rgba(255, 255, 255, 0.02);
+  --ghost-h: rgba(255, 255, 255, 0.045);
+  --dot-off: #2a2e3d;
+  --term-bg: rgba(3, 4, 7, 0.6);
+  --node-bg: #111422;
+  --inset: rgba(0, 0, 0, 0.3);
+  --atmos-o: 0.55;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --line: #e1e4ec;
+  --fg: #12141c;
+  --muted: #555b6e;
+  --faint: #7d8396;
+  --ok: #059669;
+  --ok-rgb: 5, 150, 105;
+  --str: #b45309;
+  --kw: #9333ea;
+  --prop: #2563eb;
+  --fn: #0f766e;
+  --punc: #6b7280;
+
+  --nav-bg: rgba(246, 247, 251, 0.8);
+  --grid-dot: rgba(18, 20, 28, 0.09);
+  --card-a: rgba(255, 255, 255, 0.94);
+  --card-b: rgba(250, 251, 254, 0.96);
+  --shadow: rgba(30, 35, 60, 0.18);
+  --ghost: rgba(18, 20, 28, 0.025);
+  --ghost-h: rgba(18, 20, 28, 0.05);
+  --dot-off: #d5d8e1;
+  --term-bg: #f3f4f8;
+  --node-bg: #ffffff;
+  --inset: #f3f4f8;
+  --atmos-o: 0.35;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-ok: var(--ok);
+  --color-str: var(--str);
+  --color-kw: var(--kw);
+  --color-prop: var(--prop);
+  --color-fn: var(--fn);
+  --color-punc: var(--punc);
+  --color-ghost: var(--ghost);
+  --color-ghost-h: var(--ghost-h);
+  --color-inset: var(--inset);
+  --color-term: var(--term-bg);
+
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+
+/* ------------------------------------------------------------------ Base */
+html {
+  overflow-x: clip;
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+::selection {
+  background: rgba(var(--accent-rgb), 0.3);
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* ------------------------------------------------------------------ Shared pieces */
+@layer components {
+  /* Page width: fills laptops edge to edge (with a fluid gutter), caps on very wide monitors. */
+  .container-x {
+    width: 100%;
+    max-width: 1760px;
+    margin-inline: auto;
+    padding-inline: clamp(16px, 5vw, 96px);
+  }
+  .card {
+    background: linear-gradient(180deg, var(--card-a), var(--card-b));
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 30px 70px -30px var(--shadow);
+  }
+  .card-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--muted);
+    background: var(--ghost);
+  }
+  .traffic {
+    display: flex;
+    gap: 7px;
+  }
+  .traffic i {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .traffic i:nth-child(1) {
+    background: #ff5f57;
+  }
+  .traffic i:nth-child(2) {
+    background: #febc2e;
+  }
+  .traffic i:nth-child(3) {
+    background: #28c840;
+  }
+  .chip {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    padding: 4px 9px;
+    border-radius: 7px;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    background: var(--ghost);
+  }
+  .grid-dots {
+    background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .glow-accent {
+    box-shadow: 0 10px 30px -10px rgba(var(--accent-rgb), 0.7);
+  }
+  .text-gradient {
+    background: linear-gradient(100deg, var(--fg) 10%, var(--accent) 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .caret {
+    display: inline-block;
+    width: 8px;
+    height: 1.05em;
+    background: var(--accent);
+    vertical-align: -0.18em;
+    animation: blink 1.05s steps(1) infinite;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes ping-soft {
+  70% {
+    box-shadow: 0 0 0 8px rgba(var(--ok-rgb), 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--ok-rgb), 0);
+  }
+}
+@keyframes drift {
+  from {
+    transform: translate3d(-3%, -2%, 0) scale(1);
+  }
+  to {
+    transform: translate3d(3%, 3%, 0) scale(1.08);
+  }
+}
+@keyframes wheel {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+}
+.ping-dot {
+  box-shadow: 0 0 0 0 rgba(var(--ok-rgb), 0.6);
+  animation: ping-soft 2s infinite;
+}
+.atmos {
+  opacity: var(--atmos-o);
+  filter: blur(60px);
+  background:
+    radial-gradient(40% 35% at 70% 30%, rgba(var(--accent-rgb), 0.28), transparent 70%),
+    radial-gradient(35% 30% at 20% 80%, rgba(var(--accent-rgb), 0.12), transparent 70%);
+  animation: drift 18s ease-in-out infinite alternate;
+}
+.scroll-wheel::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 7px;
+  width: 3px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--accent);
+  transform: translateX(-50%);
+  animation: wheel 1.8s infinite;
+}
+
+/* Syntax colors (editor, JSON) */
+.tok-k {
+  color: var(--kw);
+}
+.tok-v {
+  color: var(--prop);
+}
+.tok-s {
+  color: var(--str);
+}
+.tok-p {
+  color: var(--punc);
+}
+.tok-f {
+  color: var(--fn);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
