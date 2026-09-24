@@ -37,9 +37,4 @@ Copy `.env.example` to `.env.local` and fill it in when you deploy. In developme
 
 Diagram layout: each node has a column `c` (0–4) and row `r` (0–2); edges are `[from, to]` node ids.
 
-## Before launch
 
-- Replace `public/cv/Shanib-Burney-CV.pdf` with the updated CV (title "Senior Software Engineer", 1 Jul 2025 promotion). Keep the same file name.
-- Set `NEXT_PUBLIC_SITE_URL`, then `SITE_INDEXABLE=true`.
-- Add `RESEND_API_KEY` (and `CONTACT_FROM_EMAIL` once a domain is verified) so the contact form sends real email.
-- The travel & ticket SaaS is under NDA: never add its product name anywhere.
